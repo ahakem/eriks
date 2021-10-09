@@ -1,7 +1,6 @@
 const data = {
   products: [
     {
-      ahmed:"2",
       Toepassing: "Voedsel en dranken hakim",
       salePrice: "1.41",
       manufacturerName: "",
@@ -32,7 +31,6 @@ const data = {
       atp: {},
     },
     {
-      ahmed:"1",
       Toepassing: "Voedsel en dranken rody",
       salePrice: "0.66",
       manufacturerName: "",
@@ -63,7 +61,6 @@ const data = {
       atp: {},
     },
     {
-      ahmed:"1",
       Toepassing: "Voedsel en dranken",
       salePrice: "1.36",
       manufacturerName: "",
@@ -94,7 +91,6 @@ const data = {
       atp: {},
     },
     {
-      ahmed:"2",
       Toepassing: "Voedsel en dranken",
       salePrice: "0.66",
       manufacturerName: "",
@@ -110,7 +106,7 @@ const data = {
       Kleur: "Zwart",
       productImage: "https://cdn.zamro.com/assets/LRG/2a_/x_o-ring_black.png",
       Temperatuurgebied: "van  -50  tot  150",
-      BUP_Conversion: "",
+      BUP_Conversion: "x",
       minQuantity: "5",
       manufacturerImage: "",
       name: "O-ring EPDM 70 shore - Voedsel (Binnen Ø=2.9 Snoer Ø=1.78; AS568- 006)",
