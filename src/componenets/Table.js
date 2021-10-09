@@ -31,16 +31,27 @@ const ProductsTable = ({ state, toggleProducts, columns }) => {
   const badges = [];
   // special keys to take it out of the loop
   const specialKeys = ["badges", "productImage", "name"];
-  Object.keys(columns[0]).forEach((feature) => {
+
+  const sortedFetures = Object.keys(columns[0]).sort(function(a, b){
+    if(a < b) { return -1; }
+    if(a > b) { return 1; }
+    return 0;
+})
+
+sortedFetures.forEach((feature) => {
     if (specialKeys.indexOf(feature) === -1) {
-      let obj = [feature];
+      let obj = typeof(columns[0][feature]) !== "object" ?[feature] : [];
+      let emptyValue = true
       state.showingProducts.forEach((bol, index) => {
         if (bol && typeof(columns[index][feature]) !== "object") {
-          
+          //don't draw row if all values are empty strings
+          if(columns[index][feature] !=="" && emptyValue){
+            emptyValue = false
+          }
           obj.push(columns[index][feature]);
         }
       });
-      rows.push(obj);
+      !emptyValue && rows.push(obj);
     } else if (feature === "badges") {
       state.showingProducts.forEach((bol, index) => {
         if (bol) {
