@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useEffect, useState } from "react";
+import "./App.css";
+import {data, notCompared} from "./data/products";
+import ReactVirtualizedTable from './componenets/Table'
+import structureData from './utils/structureComparableData'
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [state, setstate] = useState(null)
+
+  useEffect(() => {
+    setstate(structureData(data, notCompared));
+  }, []);
+  useEffect(() => {
+   console.log("state",state)
+  })
+  return <div className="App">
+  <ReactVirtualizedTable columns={data.products}/>
+ 
+  </div>;
 }
 
 export default App;
