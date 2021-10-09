@@ -28,7 +28,7 @@ const data = {
       listPrice: "1.41",
       channel: "nl_NL",
       display: true,
-      // atp: {},
+      atp: {},
     },
     {
       Toepassing: "Voedsel en dranken rody",
@@ -58,7 +58,7 @@ const data = {
       listPrice: "0.66",
       channel: "nl_NL",
       display: true,
-      // atp: {},
+      atp: {},
     },
     {
       Toepassing: "Voedsel en dranken",
@@ -88,7 +88,7 @@ const data = {
       listPrice: "1.36",
       channel: "nl_NL",
       display: true,
-      // atp: {},
+      atp: {},
     },
     {
       Toepassing: "Voedsel en dranken",
@@ -118,7 +118,7 @@ const data = {
       listPrice: "0.66",
       channel: "nl_NL",
       display: true,
-      // atp: {},
+      atp: {},
     },
   ],
 };

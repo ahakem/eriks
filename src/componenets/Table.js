@@ -31,7 +31,8 @@ const ProductsTable = ({ state, toggleProducts, columns }) => {
     if (specialKeys.indexOf(feature) === -1) {
       let obj = [feature];
       state.showingProducts.forEach((bol, index) => {
-        if (bol) {
+        if (bol && typeof(columns[index][feature]) !== "object") {
+          
           obj.push(columns[index][feature]);
         }
       });
