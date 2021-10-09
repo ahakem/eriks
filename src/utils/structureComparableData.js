@@ -15,7 +15,6 @@ const structureData = (
   if (comparableProduct) {
     showingProducts[comparableProduct.index] = !comparableProduct.ProductState;
   }
-  console.log("showingProducts",showingProducts)
   // looping over proudects
   for (let index = 0; index < data.products.length; index++) {
     const product = data.products[index];

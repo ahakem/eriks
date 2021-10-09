@@ -43,7 +43,6 @@ const ProductsTable = ({ state, toggleProducts, columns }) => {
           badges.push(columns[index][feature].split("|"));
         }
       });
-      console.log("badges", badges.length);
     }
   });
 
