@@ -38,7 +38,7 @@ const structureData = (
       }
     });
   };
-  // remove the keys that we should not compare
+  // remove the keys that we should not be compared
   notCompared.forEach((attrubute) => {
     delete differentsKeys[attrubute];
   });

@@ -29,6 +29,7 @@ const ProductsTable = ({ state, toggleProducts, columns }) => {
 
   const rows = [];
   const badges = [];
+  // special keys to take it out of the loop
   const specialKeys = ["badges", "productImage", "name"];
   Object.keys(columns[0]).forEach((feature) => {
     if (specialKeys.indexOf(feature) === -1) {
@@ -49,9 +50,9 @@ const ProductsTable = ({ state, toggleProducts, columns }) => {
     }
   });
 
+//Generate Headers
   const colHead = () => {
     const heads = [];
-
     columns.forEach((col, index) => {
       if (state.showingProducts[index]) {
         heads.push({
