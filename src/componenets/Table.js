@@ -6,6 +6,7 @@ import { createTheme } from '@mui/material/styles';
 import TableCell from '@mui/material/TableCell';
 import Paper from '@mui/material/Paper';
 import { AutoSizer, Column, Table } from 'react-virtualized';
+import ProductsSelection from './ProductsSelection'
 const styles = (theme) => ({
   flexContainer: {
     display: 'flex',
@@ -42,7 +43,7 @@ const styles = (theme) => ({
 
 class MuiVirtualizedTable extends React.PureComponent {
   static defaultProps = {
-    headerHeight: 48,
+    headerHeight: 450,
     rowHeight: 48,
   };
 
@@ -171,7 +172,7 @@ for (let i = 0; i < 5; i += 1) {
   rows.push(createData(i, ...randomSelection));
 }
 const TestComp = ({name}) => <h1>{name}</h1>;
-export default function ReactVirtualizedTable({columns}) {
+export default function ReactVirtualizedTable({state, columns}) {
   return (
     <Paper style={{ height: 400, width: '100%' }}>
       <VirtualizedTable
@@ -180,8 +181,8 @@ export default function ReactVirtualizedTable({columns}) {
         // columns={columns}
         columns={[
           {
-            width: 200,
-            label: <TestComp name="hello"/>,
+            width: 250,
+            label: <ProductsSelection productNames={state.productNames}/>,
             dataKey: 'dessert',
           },
           {
