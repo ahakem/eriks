@@ -13,7 +13,6 @@ const Products = () => {
 
 
   const toggleProducts = (index, productState) =>{
-      debugger
     structureData(data, notCompared,state, setstate,{index, productState})
   }
 
