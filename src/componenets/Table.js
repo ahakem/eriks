@@ -104,10 +104,11 @@ sortedFetures.forEach((feature) => {
             <TableRow>
               <TableCell className={classes.firstCell}>badges</TableCell>
               {badges.map((photos, index) => (
-                <TableCell key={photos[0]}>
+                <TableCell key={`${photos[0]}-${index}`}>
                   <Box display="flex">
-                    {photos.map((badge) => (
+                    {photos.map((badge, badgeIndex) => (
                       <Avatar
+                        key={`${badgeIndex}-${index}-${badge}`}
                         sx={{ bgcolor: "gray" }}
                         variant="square"
                         alt="badge"

@@ -49,7 +49,6 @@ const ColumnHead = (props) => {
         </IconButton>
       </Box>
       <Avatar
-        sx={{}}
         variant="square"
         alt={name}
         src={img}
