@@ -1,18 +1,20 @@
 import * as React from 'react';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import {FormGroup, FormControlLabel, Checkbox, Typography} from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
   root: {
-    // backgroundColor: 'red',
     alignItems:'start',
     marginBottom:4
   },
   label:{
     fontWeight:'bold',
     fontSize:10
+  },
+  heading:{
+    color: "#2196f3",
+    fontWeight:'bold',
+    marginBottom:16,
   }
 });
  const ProductsSelection = ({productNames, toggleProducts}) =>{
@@ -20,6 +22,9 @@ const useStyles = makeStyles({
 
     return(
     <FormGroup>
+      <Typography className={classes.heading}>
+        Je Selectie
+      </Typography>
         {
           Object.keys(productNames).map(( product, index )=> 
           <FormControlLabel

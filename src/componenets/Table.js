@@ -19,6 +19,9 @@ const useStyles = makeStyles({
   badge:{
     margin:1,
   },
+  firstCell:{
+    borderRight:"1px solid #ccc"
+  }
   
 });
 const ProductsTable = ({ state, toggleProducts, columns }) => {
@@ -70,10 +73,10 @@ const ProductsTable = ({ state, toggleProducts, columns }) => {
   return (
     <>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 650 }} aria-label="Comparizon table" size="small">
           <TableHead>
             <TableRow>
-              <TableCell style={{ width: "250px", borderBottom: 0 }}>
+              <TableCell className={classes.firstCell} style={{ width: "250px", borderBottom: 0 }}>
                 <ProductsSelection
                   toggleProducts={toggleProducts}
                   productNames={state.productNames}
@@ -87,7 +90,7 @@ const ProductsTable = ({ state, toggleProducts, columns }) => {
             </TableRow>
 
             <TableRow>
-              <TableCell style={{ width: "250px" }}>badges</TableCell>
+              <TableCell className={classes.firstCell}>badges</TableCell>
               {badges.map((photos, index) => (
                 <TableCell key={photos[0]}>
                   <Box display="flex">
@@ -110,13 +113,13 @@ const ProductsTable = ({ state, toggleProducts, columns }) => {
               const diff = state.differentsKeys[row[0]] ? true : false;
               return (
                 <TableRow
-                  style={{ background: diff ? "#ccc" : "transparent" }}
+                  style={{ background: diff ? "#eee" : "transparent" }}
                   key={row[0]}
                 >
                   {row.map((cell, i) => {
                     return (
-                      <TableCell key={`${row[0]}-${cell}-${i}`}>
-                        {cell}
+                      <TableCell className={i === 0 ? classes.firstCell : ""} key={`${row[0]}-${cell}-${i}`}>
+                        {i === 0 ? cell : <b>{cell}</b>}
                       </TableCell>
                     );
                   })}
