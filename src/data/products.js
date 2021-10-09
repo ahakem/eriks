@@ -28,7 +28,7 @@ const data = {
       listPrice: "1.41",
       channel: "nl_NL",
       display: true,
-      atp: {},
+      // atp: {},
     },
     {
       Toepassing: "Voedsel en dranken rody",
@@ -52,13 +52,13 @@ const data = {
       name: "O-ring EPDM 70 shore - Voedsel (Binnen Ø=1.78 Snoer Ø=1.78; AS568- 004)",
       Materiaal: "EPDM",
       sku: "11545A",
-      Snoerdikte: "1.78",
+      Snoerdikte: "2.62",
       "Inwendige diameter": "1.78",
       "Maat volgens AS568": "4",
       listPrice: "0.66",
       channel: "nl_NL",
       display: true,
-      atp: {},
+      // atp: {},
     },
     {
       Toepassing: "Voedsel en dranken",
@@ -88,7 +88,7 @@ const data = {
       listPrice: "1.36",
       channel: "nl_NL",
       display: true,
-      atp: {},
+      // atp: {},
     },
     {
       Toepassing: "Voedsel en dranken",
@@ -118,7 +118,7 @@ const data = {
       listPrice: "0.66",
       channel: "nl_NL",
       display: true,
-      atp: {},
+      // atp: {},
     },
   ],
 };

@@ -1,186 +1,50 @@
 import * as React from "react";
-import PropTypes from "prop-types";
-import clsx from "clsx";
-import { withStyles } from "@mui/styles";
-import { createTheme } from "@mui/material/styles";
-import TableCell from "@mui/material/TableCell";
-import Paper from "@mui/material/Paper";
-import { AutoSizer, Column, Table } from "react-virtualized";
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Box,
+  Avatar,
+} from "@mui/material";
+
 import ProductsSelection from "./ProductsSelection";
-
-const styles = (theme) => ({
-  flexContainer: {
-    display: "flex",
-    alignItems: "center",
-    boxSizing: "border-box",
+import ColumnHead from "./ColumnHead";
+import { makeStyles } from "@mui/styles";
+const useStyles = makeStyles({
+  badge:{
+    margin:1,
   },
-  table: {
-    // temporary right-to-left patch, waiting for
-    // https://github.com/bvaughn/react-virtualized/issues/454
-    "& .ReactVirtualized__Table__headerRow": {
-      ...(theme.direction === "rtl" && {
-        paddingLeft: "0 !important",
-      }),
-      ...(theme.direction !== "rtl" && {
-        paddingRight: undefined,
-      }),
-    },
-  },
-  tableRow: {
-    cursor: "pointer",
-  },
-  tableRowHover: {
-    "&:hover": {
-      backgroundColor: theme.palette.grey[200],
-    },
-  },
-  tableCell: {
-    flex: 1,
-  },
-  noClick: {
-    cursor: "initial",
-  },
+  
 });
+const ProductsTable = ({ state, toggleProducts, columns }) => {
+  const classes = useStyles();
 
-class MuiVirtualizedTable extends React.PureComponent {
-  static defaultProps = {
-    headerHeight: 250,
-    rowHeight: 48,
-  };
-
-  getRowClassName = ({ index }) => {
-    const { classes, onRowClick } = this.props;
-
-    return clsx(classes.tableRow, classes.flexContainer, {
-      [classes.tableRowHover]: index !== -1 && onRowClick != null,
-    });
-  };
-
-  cellRenderer = ({ cellData, columnIndex }) => {
-    const { columns, classes, rowHeight, onRowClick } = this.props;
-    return (
-      <TableCell
-        component="div"
-        className={clsx(classes.tableCell, classes.flexContainer, {
-          [classes.noClick]: onRowClick == null,
-        })}
-        variant="body"
-        style={{ height: rowHeight }}
-        align={
-          (columnIndex != null && columns[columnIndex].numeric) || false
-            ? "right"
-            : "left"
-        }
-      >
-        {cellData}
-      </TableCell>
-    );
-  };
-
-  headerRenderer = ({ label, columnIndex }) => {
-    const { headerHeight, columns, classes } = this.props;
-
-    return (
-      <TableCell
-        component="div"
-        className={clsx(
-          classes.tableCell,
-          classes.flexContainer,
-          classes.noClick
-        )}
-        variant="head"
-        style={{ height: headerHeight }}
-        align={columns[columnIndex].numeric || false ? "right" : "left"}
-      >
-        <span>{label}</span>
-      </TableCell>
-    );
-  };
-
-  render() {
-    const { classes, columns, rowHeight, headerHeight, ...tableProps } =
-      this.props;
-    return (
-      <AutoSizer>
-        {({ height, width }) => (
-          <Table
-            height={height}
-            width={width}
-            rowHeight={rowHeight}
-            gridStyle={{
-              direction: "inherit",
-            }}
-            headerHeight={headerHeight}
-            className={classes.table}
-            {...tableProps}
-            rowClassName={this.getRowClassName}
-          >
-            {columns.map(({ dataKey, ...other }, index) => {
-              return (
-                <Column
-                  key={dataKey}
-                  headerRenderer={(headerProps) =>
-                    this.headerRenderer({
-                      ...headerProps,
-                      columnIndex: index,
-                    })
-                  }
-                  className={classes.flexContainer}
-                  cellRenderer={this.cellRenderer}
-                  dataKey={dataKey}
-                  {...other}
-                />
-              );
-            })}
-          </Table>
-        )}
-      </AutoSizer>
-    );
-  }
-}
-
-MuiVirtualizedTable.propTypes = {
-  classes: PropTypes.object.isRequired,
-  columns: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.object.isRequired,
-      numeric: PropTypes.bool,
-      width: PropTypes.number.isRequired,
-    })
-  ).isRequired,
-  headerHeight: PropTypes.number,
-  onRowClick: PropTypes.func,
-  rowHeight: PropTypes.number,
-};
-
-const defaultTheme = createTheme();
-const VirtualizedTable = withStyles(styles, { defaultTheme })(
-  MuiVirtualizedTable
-);
-
-  
-const TestComp = ({ name }) => <span>{name}</span>;
-
-export default function ReactVirtualizedTable({
-  state,
-  toggleProducts,
-  columns,
-}) {
   const rows = [];
-
-
-
-Object.keys(columns[0]).forEach((feature)=> {
-    let obj = { featureName: feature };
-    state.showingProducts.forEach((bol, index) => {
-      if (bol) {
-        obj[index]= columns[index][feature];
-      }
-    });
-    rows.push(obj);
-  
-  })
-  console.log("rows",rows)
+  const badges = [];
+  const specialKeys = ["badges", "productImage", "name"];
+  Object.keys(columns[0]).forEach((feature) => {
+    if (specialKeys.indexOf(feature) === -1) {
+      let obj = [feature];
+      state.showingProducts.forEach((bol, index) => {
+        if (bol) {
+          obj.push(columns[index][feature]);
+        }
+      });
+      rows.push(obj);
+    } else if (feature === "badges") {
+      state.showingProducts.forEach((bol, index) => {
+        if (bol) {
+          badges.push(columns[index][feature].split("|"));
+        }
+      });
+      console.log("badges", badges.length);
+    }
+  });
 
   const colHead = () => {
     const heads = [];
@@ -188,36 +52,80 @@ Object.keys(columns[0]).forEach((feature)=> {
     columns.forEach((col, index) => {
       if (state.showingProducts[index]) {
         heads.push({
-          width: 200,
-          label: <TestComp name={col.name} />,
-          dataKey: index,
-          numeric: false,
+          comp: (
+            <ColumnHead
+              img={col.productImage}
+              price={col.salePrice}
+              name={col.name}
+            />
+          ),
+          key: col.name,
         });
       }
     });
     return heads;
   };
   return (
-    <Paper style={{ height: "100vh", width: "100%" }}>
-      <VirtualizedTable
-        rowCount={26}
-        rowGetter={({ index }) => rows[index]}
-        
-        columns={[
-          {
-            width: 250,
-            dataKey:"featureName",
-            label: (
-              <ProductsSelection
-                toggleProducts={toggleProducts}
-                productNames={state.productNames}
-                
-              />
-            ),
-          },
-          ...colHead(),
-        ]}
-      />
-    </Paper>
+    <>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell style={{ width: "250px", borderBottom: 0 }}>
+                <ProductsSelection
+                  toggleProducts={toggleProducts}
+                  productNames={state.productNames}
+                />
+              </TableCell>
+              {colHead().map((head) => (
+                <TableCell style={{ borderBottom: 0 }} key={head.key}>
+                  {head.comp}
+                </TableCell>
+              ))}
+            </TableRow>
+
+            <TableRow>
+              <TableCell style={{ width: "250px" }}>badges</TableCell>
+              {badges.map((photos, index) => (
+                <TableCell key={photos[0]}>
+                  <Box display="flex">
+                    {photos.map((badge) => (
+                      <Avatar
+                        sx={{ bgcolor: "gray" }}
+                        variant="square"
+                        alt="badge"
+                        src={badge}
+                        className={classes.badge}
+                      />
+                    ))}
+                  </Box>
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row, index) => {
+              const diff = state.differentsKeys[row[0]] ? true : false;
+              return (
+                <TableRow
+                  style={{ background: diff ? "#ccc" : "transparent" }}
+                  key={row[0]}
+                >
+                  {row.map((cell, i) => {
+                    return (
+                      <TableCell key={`${row[0]}-${cell}-${i}`}>
+                        {cell}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
-}
+};
+
+export default ProductsTable;
