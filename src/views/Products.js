@@ -12,8 +12,9 @@ const Products = () => {
   }, []);
 
 
-  const toggleProducts = (index, ProductState) =>{
-    structureData(data, notCompared,state, setstate,{index, ProductState})
+  const toggleProducts = (index, productState) =>{
+      debugger
+    structureData(data, notCompared,state, setstate,{index, productState})
   }
 
   if (!state) return <div>Loading...</div>;

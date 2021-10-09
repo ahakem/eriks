@@ -54,9 +54,11 @@ const ProductsTable = ({ state, toggleProducts, columns }) => {
         heads.push({
           comp: (
             <ColumnHead
+              toggleProducts={toggleProducts}
               img={col.productImage}
               price={col.salePrice}
               name={col.name}
+              index={index}
             />
           ),
           key: col.name,

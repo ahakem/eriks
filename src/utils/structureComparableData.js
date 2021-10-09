@@ -13,7 +13,7 @@ const structureData = (
   //make all proudects displayed by defult
   let showingProducts = state ? state.showingProducts : [...Array(data.products.length).fill(true)];
   if (comparableProduct) {
-    showingProducts[comparableProduct.index] = !comparableProduct.ProductState;
+    showingProducts[comparableProduct.index] = !comparableProduct.productState;
   }
   // looping over proudects
   for (let index = 0; index < data.products.length; index++) {
@@ -45,7 +45,6 @@ const structureData = (
   // set state
   callback({
     differentsKeys,
-    comparableAttributes,
     productNames,
     showingProducts,
   });
