@@ -6,14 +6,18 @@ const Products = () => {
   const [state, setstate] = useState(null);
 
   useEffect(() => {
-    structureData(data, notCompared, setstate);
+    structureData(data, notCompared, state, setstate);
   }, []);
   useEffect(() => {
-    state && console.log(state.productNames)
+    state && console.log(state.differentsKeys,Object.keys(state.differentsKeys).length)
   });
 
+  const toggleProducts = (index, ProductState) =>{
+    structureData(data, notCompared,state, setstate,{index, ProductState})
+  }
+
   if (!state) return <div>Loading...</div>;
-  return <ReactVirtualizedTable state={state} columns={data.products} />;
+  return <ReactVirtualizedTable toggleProducts={toggleProducts} state={state} columns={data.products} />;
 };
 
 export default Products;

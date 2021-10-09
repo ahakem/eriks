@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     fontSize:10
   }
 });
- const ProductsSelection = ({productNames}) =>{
+ const ProductsSelection = ({productNames, toggleProducts}) =>{
   const classes = useStyles();
 
     return(
@@ -24,7 +24,8 @@ const useStyles = makeStyles({
           Object.keys(productNames).map(( product, index )=> 
           <FormControlLabel
           classes={{root:classes.root,label:classes.label}}
-          key={product} control={<Checkbox defaultChecked  size="small" />} label={productNames[index].name} />)
+          onChange={()=>{toggleProducts(index, productNames[index].show)}}
+          key={product} control={<Checkbox checked={productNames[index].show}  size="small" />} label={productNames[index].name} />)
         }
         
       </FormGroup>

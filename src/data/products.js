@@ -1,6 +1,7 @@
 const data = {
   products: [
     {
+      ahmed:"2",
       Toepassing: "Voedsel en dranken hakim",
       salePrice: "1.41",
       manufacturerName: "",
@@ -31,6 +32,7 @@ const data = {
       atp: {},
     },
     {
+      ahmed:"1",
       Toepassing: "Voedsel en dranken rody",
       salePrice: "0.66",
       manufacturerName: "",
@@ -61,6 +63,7 @@ const data = {
       atp: {},
     },
     {
+      ahmed:"1",
       Toepassing: "Voedsel en dranken",
       salePrice: "1.36",
       manufacturerName: "",
@@ -91,6 +94,7 @@ const data = {
       atp: {},
     },
     {
+      ahmed:"2",
       Toepassing: "Voedsel en dranken",
       salePrice: "0.66",
       manufacturerName: "",

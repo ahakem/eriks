@@ -172,7 +172,7 @@ for (let i = 0; i < 5; i += 1) {
   rows.push(createData(i, ...randomSelection));
 }
 const TestComp = ({name}) => <h1>{name}</h1>;
-export default function ReactVirtualizedTable({state, columns}) {
+export default function ReactVirtualizedTable({state, toggleProducts, columns}) {
   return (
     <Paper style={{ height: 400, width: '100%' }}>
       <VirtualizedTable
@@ -182,7 +182,7 @@ export default function ReactVirtualizedTable({state, columns}) {
         columns={[
           {
             width: 250,
-            label: <ProductsSelection productNames={state.productNames}/>,
+            label: <ProductsSelection toggleProducts={toggleProducts} productNames={state.productNames}/>,
             dataKey: 'dessert',
           },
           {
